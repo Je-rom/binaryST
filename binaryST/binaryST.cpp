@@ -134,6 +134,23 @@ public:
 		}
 	}
 
+	int height(TreeNode* r)
+	{
+		if (r == NULL)
+		{
+			return -1;
+		}
+		else
+		{
+			int lheight = height(r->left);
+			int rheight = height(r->right);
+
+			if (lheight > rheight)
+				return(lheight + 1);
+			else return(rheight + 1);
+		}
+	}
+
 
 	void printPreorder(TreeNode* r) // (root, left, right)
 	{
@@ -203,11 +220,13 @@ int main() {
 	int option, val;
 
 	do {
+		
 		cout << "What operation do you want to perform? Select option number. Enter 0 to exit" << endl;
 		cout << "1. insert node" << endl;
 		cout << "2. search node" << endl;
 		cout << "3. delete node" << endl;
 		cout << "4. print BST values" << endl;
+		cout << "5. height of tree" << endl;
 		cout << "5. clear screen" << endl;
 		cout << "0. exit program" << endl;
 
@@ -251,7 +270,7 @@ int main() {
 				break;
 
 			case 4:
-				cout << "print BST values and traverse" << endl;
+				cout << "print BST values" << endl;
 				bs.print2D(bs.root, 5);
 				//bs.printPreorder(bs.root);
 				//bs.printInorder(bs.root);
@@ -259,6 +278,11 @@ int main() {
 				break;
 
 			case 5:
+				cout << "tree height" << endl;
+				cout << "height: " << bs.height(bs.root) << endl;
+				break;
+
+			case 6:
 				cout << "clear screen" << endl;
 				system("cls");
 				break;
