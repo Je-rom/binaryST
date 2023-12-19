@@ -94,15 +94,15 @@ public:
 	{
 		if (r == NULL || r->value == val)
 		{
-			return root;
+			return r;
 		}
 		else if(val < r->value)
 		{
-			recursiveSearch(r->left, val);
+			return recursiveSearch(r->left, val);
 		}
 		else
 		{
-			recursiveSearch(r->right, val);
+			return recursiveSearch(r->right, val);
 		}
 	}
 
@@ -233,8 +233,8 @@ int main() {
 				cout << "search node" << endl;
 				cout << "Enter a value you want to search for: ";
 				cin >> val;
-				new_node = bs.iterativeSearch(val);
-				//new_node = bs.recursiveSearch(v);
+				//new_node = bs.iterativeSearch(val);
+				new_node = bs.recursiveSearch(bs.root, val);
 				if (new_node != NULL)
 				{
 					cout << "value " << val << " found" << endl;
