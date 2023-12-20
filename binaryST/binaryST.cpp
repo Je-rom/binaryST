@@ -151,6 +151,27 @@ public:
 		}
 	}
 
+	void printGivenLevel(TreeNode* r, int level)
+	{
+		if (r == NULL)
+			return;
+		else if (level == 0)
+			cout << r->value << " ";
+		else
+		{
+			printGivenLevel(r->left, level - 1);
+			printGivenLevel(r->right, level - 1);
+		}
+	}
+	void printLevelOrder(TreeNode* r)
+	{
+		int h = height(r);
+		for (int i = 0; i <= h; i++)
+		{
+			printGivenLevel(r, i);
+		}
+	}
+
 
 	void printPreorder(TreeNode* r) // (root, left, right)
 	{
@@ -227,7 +248,7 @@ int main() {
 		cout << "3. delete node" << endl;
 		cout << "4. print BST values" << endl;
 		cout << "5. height of tree" << endl;
-		cout << "5. clear screen" << endl;
+		cout << "6. clear screen" << endl;
 		cout << "0. exit program" << endl;
 
 		cin >> option;
@@ -275,6 +296,7 @@ int main() {
 				//bs.printPreorder(bs.root);
 				//bs.printInorder(bs.root);
 				//bs.printPostorder(bs.root);
+				bs.printLevelOrder(bs.root);
 				break;
 
 			case 5:
