@@ -90,6 +90,54 @@ public:
 		}
 	}
 
+	TreeNode* minValueNode(TreeNode* node)
+	{
+		TreeNode* current = node;
+		while (current->left != NULL)
+		{
+			current = current->left;
+		}
+		return current;
+	}
+
+	TreeNode* deleteNode(TreeNode* r, int v) 
+	{
+		if (r == NULL) // root case
+		{
+			return r;
+		}
+		else if (v < r->value)
+		{
+			r->left = deleteNode(r->left, v);
+		}
+		else if (v > r->value)
+		{
+			r->right = deleteNode(r->right, v);
+		}
+		else
+		{ 
+			if (r->left == NULL)
+			{
+				TreeNode* temp = r->right;
+				delete r;
+				return temp;
+			}
+			else if (r->right == NULL)
+			{
+				TreeNode* temp = r->left;
+				delete r;
+				return temp;
+			}
+			else
+			{
+				TreeNode* temp = minValueNode(r->right);
+				r->value = temp->value;
+				r->right = deleteNode(r->right, temp->value);
+			}
+		}
+		return r;
+	}
+
 	TreeNode* recursiveSearch(TreeNode* r, int val)
 	{
 		if (r == NULL || r->value == val)
@@ -287,7 +335,17 @@ int main() {
 
 			case 3:
 				cout << "delete node" << endl;
-
+				cout << "enter a value to delete: ";
+				cin >> val;
+				new_node = bs.iterativeSearch(val);
+				if (new_node != NULL)
+				{
+					bs.deleteNode(bs.root, val);
+				}
+				else
+				{
+					cout << "value NOT found" << endl;
+				}
 				break;
 
 			case 4:
